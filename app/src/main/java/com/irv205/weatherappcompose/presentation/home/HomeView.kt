@@ -22,6 +22,7 @@ import com.irv205.weatherappcompose.presentation.main.DisplayContent
 fun HomeView(vm : WeatherViewModel, navigateToDetails : () -> Unit){
 
     val viewState = remember { vm.viewState }
+    val inputValue = remember { vm.inputValue }
 
     when(val view = viewState.value){
         is WeatherViewState.Error -> {
@@ -30,32 +31,29 @@ fun HomeView(vm : WeatherViewModel, navigateToDetails : () -> Unit){
             }
         }
         WeatherViewState.HomeView -> {
-            HomeBody(vm = vm) {
-                navigateToDetails.invoke()
-            }
+            HomeBody(inputValue.value, onInputChanged = { vm.setInputValue(it)}, onBtnClick = {
+                vm.getWeatherList(it) }, navigateToDetails = {navigateToDetails.invoke()})
         }
     }
 }
 
 @Composable
-fun HomeBody(vm : WeatherViewModel, navigateToDetails : () -> Unit){
-
-    val inputValue = remember { vm.inputValue }
+fun HomeBody(inputValue: String, navigateToDetails : () -> Unit, onInputChanged : (String) -> Unit, onBtnClick : (() -> Unit) -> Unit){
 
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TextField(
-            value = inputValue.value,
-            onValueChange = { vm.setInputValue(it) },
+            value = inputValue,
+            onValueChange = { onInputChanged(it) },
         )
 
         Spacer(modifier = Modifier.size(8.dp))
 
         Button(modifier = Modifier,
             onClick = {
-                vm.getWeatherList{
+                onBtnClick{
                     navigateToDetails.invoke()
                 }
             },

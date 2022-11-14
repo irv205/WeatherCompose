@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.irv205.weatherappcompose.R
-import com.irv205.weatherappcompose.core.utils.converKelvinToFahrenheit
+import com.irv205.weatherappcompose.core.utils.convertKelvinStringToFahrenheitString
 import com.irv205.weatherappcompose.domain.DomainWeather
 import com.irv205.weatherappcompose.presentation.WeatherViewModel
 import com.irv205.weatherappcompose.presentation.main.HeaderView
@@ -59,7 +59,7 @@ fun ItemForecast(modifier: Modifier = Modifier, domainWeather: DomainWeather, on
                 },
             horizontalArrangement = Arrangement.SpaceEvenly) {
             Text(text = domainWeather.weather)
-            Text(text = stringResource(id = R.string.item_temp, converKelvinToFahrenheit(domainWeather.temp)))
+            Text(text = stringResource(id = R.string.item_temp, convertKelvinStringToFahrenheitString(domainWeather.temp)))
         }
     }
 
