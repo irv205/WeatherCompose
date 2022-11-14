@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WeatherAppCompose</string>
+    <string name="item_temp">Temp: %s°</string>
+    <string name="more_details_temp">%s°</string>
+    <string name="more_details_feels_like">Feels like: %s°</string>
+    <string name="home_btn">Lookup</string>
+    <string name="error_404">city not found</string>
+</resources>
